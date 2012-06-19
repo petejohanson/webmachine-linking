@@ -1,5 +1,6 @@
 require 'webmachine'
 
+require 'webmachine-linking/application'
 require 'webmachine-linking/dispatcher/route'
 require 'webmachine-linking/url_provider'
 require 'webmachine-linking/link_header'

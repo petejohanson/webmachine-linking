@@ -10,8 +10,6 @@ $foos = {
 
 class BaseResource < Webmachine::Resource
   include Webmachine::Linking::Resource::LinkHelpers
-
-  attr_accessor :url_provider
 end
 
 class FooCollectionResource < BaseResource
@@ -49,12 +47,6 @@ class FooResource < BaseResource
 end
 
 app = Webmachine::Application.new do |app|
-  url_provider = Webmachine::Linking::UrlProvider.new(app.dispatcher.routes)
-
-  app.dispatcher.resource_creator = lambda do |route, request, response|
-    route.resource.new(request, response).tap { |r| r.url_provider = url_provider }
-  end
-
   app.configure do |cfg|
     cfg.port = 8888
     cfg.adapter = :WEBrick
@@ -64,6 +56,8 @@ app = Webmachine::Application.new do |app|
     add ['foos'], FooCollectionResource
     add ['foos', :foo_id], FooResource
   end
+
+  app.inject_resource_url_provider
 end
 
 app.run

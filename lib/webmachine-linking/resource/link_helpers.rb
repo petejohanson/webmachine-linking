@@ -3,6 +3,8 @@ module Webmachine
   module Linking
     class Resource
       module LinkHelpers
+        attr_accessor :url_provider
+
         def url_for(resource, *vars)
 	  url_provider.url_for(resource, *vars)
 	end

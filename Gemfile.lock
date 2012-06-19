@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/seancribbs/webmachine-ruby.git
-  revision: ab701ad52e00f5ee5816a8d1efd5d910ca97e27c
+  revision: 49fadb1e2898ff7feed9f6bbefd325f303cbeb1c
   specs:
     webmachine (0.4.2)
       i18n (>= 0.4.0)

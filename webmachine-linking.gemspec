@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.authors = ["Pete Johanson"]
   gem.email = ["peter@peterjohanson.com"]
 
-  gem.add_runtime_dependency(%q<webmachine>, [">= 0.4.3"])
+  #gem.add_runtime_dependency(%q<webmachine>, [">= 0.5.0"])
   gem.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
   gem.add_development_dependency(%q<rake>)
 
