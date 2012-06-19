@@ -9,11 +9,9 @@ $foos = {
 }
 
 class BaseResource < Webmachine::Resource
-  attr_accessor :url_provider
+  include Webmachine::Linking::Resource::LinkHelpers
 
-  def url_for(resource, *vars)
-    url_provider.url_for(resource, *vars)
-  end
+  attr_accessor :url_provider
 end
 
 class FooCollectionResource < BaseResource
@@ -37,7 +35,8 @@ class FooResource < BaseResource
   end
 
   def to_html
-    response.headers['Link'] = "<#{url_for FooCollectionResource}>; rel=up"
+    add_link_header('up', FooCollectionResource)
+    add_link_header('self', FooResource, request.path_info)
     <<-EOF
       <html>
         <body>
