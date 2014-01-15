@@ -1,8 +1,12 @@
 require 'rbconfig'
-source :rubygems
+source 'https://rubygems.org'
 
 gemspec
 
-gem 'bundler'
+platform :rbx do
+  gem 'rubysl'
+end
 
-gem 'webmachine', :git => 'git://github.com/seancribbs/webmachine-ruby.git'
+gem 'bundler'
+gem 'link_header'
+gem 'webmachine', :github => 'seancribbs/webmachine-ruby'
