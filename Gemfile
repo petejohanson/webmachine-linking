@@ -4,5 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'bundler'
-
-gem 'webmachine', :git => 'git://github.com/seancribbs/webmachine-ruby.git'
+gem 'link_header'
+gem 'webmachine', :github => 'seancribbs/webmachine-ruby'
