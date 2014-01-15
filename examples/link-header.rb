@@ -15,7 +15,7 @@ end
 class FooCollectionResource < BaseResource
   def to_html
     foo_links = $foos.map { |k,v| "<a href='#{url_for FooResource, :foo_id => k.to_s}'>#{v}</a>" }.join("<br/>")
-    
+
     <<-EOF
       <html>
         <body>
@@ -33,14 +33,18 @@ class FooResource < BaseResource
   end
 
   def to_html
-    add_link_header('up', FooCollectionResource)
-    add_link_header('self', FooResource, request.path_info)
+    link_header('up', FooCollectionResource)
+    link_header('self', self.class, request.path_info)
     <<-EOF
       <html>
+        <head>
+          #{link_tag('up', FooCollectionResource)}
+          #{link_tag('self', self.class)}
+        </head>
         <body>
-	<div><a href="#{url_for FooCollectionResource}">Up</a></div>
-	<div>Item: #{$foos[request.path_info[:foo_id].to_i]}!</div>
-	</body>
+          <div><a href="#{url_for FooCollectionResource}">Up</a></div>
+          <div>Item: #{$foos[request.path_info[:foo_id].to_i]}!</div>
+        </body>
       </html>
     EOF
   end

@@ -5,10 +5,10 @@ module Webmachine
         attr_accessor :url_provider
 
         def url_for(resource, *vars)
-	        url_provider.url_for(resource, *vars)
+          url_provider.url_for(resource, *vars)
         end
 
-        def add_link_header(attr_pairs, resource, *vars)
+        def link_header(attr_pairs, resource, *vars)
           unless response.headers['Link']
             response.headers['Link'] = LinkHeader.new
           end
@@ -23,7 +23,7 @@ module Webmachine
           response.headers['Link'] << link
         end
 
-        def link_for(attr_pairs, resource, *vars)
+        def link_tag(attr_pairs, resource, *vars)
           if attr_pairs.is_a?(String)
             attr_pairs = attr_pairs.split(',').map {|rel| ['rel', rel.strip] }
           end
