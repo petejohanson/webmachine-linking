@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   #gem.add_runtime_dependency(%q<webmachine>, [">= 0.5.0"])
   gem.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
   gem.add_development_dependency(%q<rake>)
+  gem.add_dependency(%q<link_header>)
 
   ignores = File.read(".gitignore").split(/\r?\n/).reject{ |f| f =~ /^(#.+|\s*)$/ }.map {|f| Dir[f] }.flatten
   gem.files = (Dir['**/*','.gitignore'] - ignores).reject {|f| !File.file?(f) }

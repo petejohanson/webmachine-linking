@@ -1,4 +1,3 @@
-
 module Webmachine
   module Linking
     class Resource
@@ -6,21 +5,31 @@ module Webmachine
         attr_accessor :url_provider
 
         def url_for(resource, *vars)
-	  url_provider.url_for(resource, *vars)
-	end
+	        url_provider.url_for(resource, *vars)
+        end
 
-	def add_link_header(rel, resource, *vars)
-	  links = response.headers['Link']
-	  unless links
-	    links = response.headers['Link'] = []
-	  end
+        def add_link_header(attr_pairs, resource, *vars)
+          unless response.headers['Link']
+            response.headers['Link'] = LinkHeader.new
+          end
 
-	  lh = LinkHeader.new(rel, url_for(resource, *vars))
+          if attr_pairs.is_a?(String)
+            attr_pairs = attr_pairs.split(',').map {|rel| ['rel', rel.strip] }
+          end
+          link = LinkHeader::Link.new(url_for(resource, *vars), attr_pairs)
 
-	  yield lh if block_given?
+          yield link if block_given?
 
-	  links << lh.to_s
-	end
+          response.headers['Link'] << link
+        end
+
+        def link_for(attr_pairs, resource, *vars)
+          if attr_pairs.is_a?(String)
+            attr_pairs = attr_pairs.split(',').map {|rel| ['rel', rel.strip] }
+          end
+          LinkHeader::Link.new(url_for(resource, *vars), attr_pairs).to_html
+        end
+
       end
     end
   end
