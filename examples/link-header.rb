@@ -39,7 +39,7 @@ class FooResource < BaseResource
       <html>
         <head>
           #{link_tag('up', FooCollectionResource)}
-          #{link_tag('self', self.class)}
+          #{link_tag('self', self.class, request.path_info)}
         </head>
         <body>
           <div><a href="#{url_for FooCollectionResource}">Up</a></div>
