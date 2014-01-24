@@ -1,5 +1,4 @@
 
-
 module Webmachine
   class Dispatcher
     class Route
@@ -18,7 +17,11 @@ module Webmachine
         "/" + path_spec.map do |p|
           case p
           when String
-            p
+            if p == Webmachine::Dispatcher::Route::MATCH_ALL && vars.is_a?(String)
+              vars
+            else
+              p
+            end
           when Symbol
             vars.fetch(p)
           end
